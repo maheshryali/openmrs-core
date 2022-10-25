@@ -1,5 +1,5 @@
 pipeline {
-    agent {agent 'SPRING'}
+    agent {label 'SPRING'}
     steps {
         stage('vcs') {
             steps {
@@ -11,7 +11,7 @@ pipeline {
             steps {
                 rtServer (
                     id: "openmrs_artifact",
-                    url:'https://jfrogproject123.jfrog.io',
+                    url: 'https://jfrogproject123.jfrog.io',
                     credentialsId: JFROG_OPENMRS
                 )
 
@@ -35,7 +35,7 @@ pipeline {
             steps {
                 rtMavenRun (
                     tool: mavenew, // Tool name from Jenkins configuration
-                    pom: 'pom.xml',
+                    pom: 'maven-examples/maven-example/pom.xml',
                     goals: 'clean install',
                     deployerId: "MAVEN_DEPLOYER",
                     resolverId: "MAVEN_RESOLVER"
