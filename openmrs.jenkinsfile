@@ -12,15 +12,15 @@ pipeline {
                 rtMavenDeployer (
                     id: "MAVEN_DEPLOYER",
                     serverId: "openmrs_artifact",
-                    releaseRepo: new_jenkins-libs-release,
-                    snapshotRepo: new_jenkins-libs-snapshot
+                    releaseRepo: 'new_jenkins-libs-release',
+                    snapshotRepo: 'new_jenkins-libs-snapshot'
                 )
 
                 rtMavenResolver (
                     id: "MAVEN_RESOLVER",
                     serverId: "openmrs_artifact",
-                    releaseRepo: new_jenkins-libs-release,
-                    snapshotRepo: new_jenkins-libs-snapshot
+                    releaseRepo: 'new_jenkins-libs-release',
+                    snapshotRepo: 'new_jenkins-libs-snapshot'
                 )
             }
         }
@@ -28,7 +28,7 @@ pipeline {
         stage ('Exec Maven') {
             steps {
                 rtMavenRun (
-                    tool: mavenew, 
+                    tool: 'mavenew', 
                     pom: 'pom.xml',
                     goals: 'clean install',
                     deployerId: "MAVEN_DEPLOYER",
