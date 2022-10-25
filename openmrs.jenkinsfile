@@ -10,15 +10,15 @@ pipeline {
     stage ('Artifactory configuration') {
             steps {
                 rtMavenDeployer (
-                    id: "MAVEN_DEPLOYER",
-                    serverId: "openmrs_artifact",
+                    id: 'MAVEN_DEPLOYER',
+                    serverId: 'openmrs_artifact',
                     releaseRepo: 'new_jenkins-libs-release',
                     snapshotRepo: 'new_jenkins-libs-snapshot'
                 )
 
                 rtMavenResolver (
                     id: "MAVEN_RESOLVER",
-                    serverId: "openmrs_artifact",
+                    serverId: 'openmrs_artifact',
                     releaseRepo: 'new_jenkins-libs-release',
                     snapshotRepo: 'new_jenkins-libs-snapshot'
                 )
@@ -31,8 +31,8 @@ pipeline {
                     tool: 'mavenew', 
                     pom: 'pom.xml',
                     goals: 'clean install',
-                    deployerId: "MAVEN_DEPLOYER",
-                    resolverId: "MAVEN_RESOLVER"
+                    deployerId: 'MAVEN_DEPLOYER',
+                    resolverId: 'MAVEN_RESOLVER'
                 )
             }
         }
@@ -40,7 +40,7 @@ pipeline {
         stage ('Publish build info') {
             steps {
                 rtPublishBuildInfo (
-                    serverId: "openmrs_artifact"
+                    serverId: 'openmrs_artifact'
                 )
             }
         }
