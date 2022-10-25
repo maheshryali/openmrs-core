@@ -9,12 +9,6 @@ pipeline {
         }
     stage ('Artifactory configuration') {
             steps {
-                rtServer (
-                    id: "openmrs_artifact",
-                    url: 'https://jfrogproject123.jfrog.io',
-                    credentialsId: JFROG_OPENMRS
-                )
-
                 rtMavenDeployer (
                     id: "MAVEN_DEPLOYER",
                     serverId: "openmrs_artifact",
