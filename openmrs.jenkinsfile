@@ -1,6 +1,6 @@
 pipeline {
     agent {label 'SPRING'}
-    steps {
+    stages {
         stage('vcs') {
             steps {
                 git branch: 'master',
