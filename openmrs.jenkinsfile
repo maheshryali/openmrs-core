@@ -12,15 +12,15 @@ pipeline {
                 rtMavenDeployer (
                     id: 'MAVEN_DEPLOYER',
                     serverId: 'openmrs_artifact',
-                    releaseRepo: 'new_jenkins-libs-release',
-                    snapshotRepo: 'new_jenkins-libs-snapshot'
+                    releaseRepo: 'openmrs-libs-release',
+                    snapshotRepo: 'openmrs-libs-snapshot'
                 )
 
                 rtMavenResolver (
                     id: "MAVEN_RESOLVER",
                     serverId: 'openmrs_artifact',
-                    releaseRepo: 'new_jenkins-libs-release',
-                    snapshotRepo: 'new_jenkins-libs-snapshot'
+                    releaseRepo: 'openmrs-libs-release',
+                    snapshotRepo: 'openmrs-libs-snapshot'
                 )
             }
         }
