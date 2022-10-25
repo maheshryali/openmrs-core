@@ -1,0 +1,57 @@
+pipeline {
+    agent {agent 'SPRING'}
+    steps {
+        stage('vcs') {
+            steps {
+                git branch: 'master',
+                       url: 'https://github.com/maheshryali/openmrs-core.git'
+            }
+        }
+    stage ('Artifactory configuration') {
+            steps {
+                rtServer (
+                    id: "openmrs_artifact",
+                    url: https://jfrogproject123.jfrog.io,
+                    credentialsId: JFROG_OPENMRS
+                )
+
+                rtMavenDeployer (
+                    id: "MAVEN_DEPLOYER",
+                    serverId: "openmrs_artifact",
+                    releaseRepo: new_jenkins-libs-release,
+                    snapshotRepo: new_jenkins-libs-snapshot
+                )
+
+                rtMavenResolver (
+                    id: "MAVEN_RESOLVER",
+                    serverId: "openmrs_artifact",
+                    releaseRepo: new_jenkins-libs-release,
+                    snapshotRepo: new_jenkins-libs-snapshot
+                )
+            }
+        }
+
+        stage ('Exec Maven') {
+            steps {
+                rtMavenRun (
+                    tool: mavenew, // Tool name from Jenkins configuration
+                    pom: 'maven-examples/maven-example/pom.xml',
+                    goals: 'clean install',
+                    deployerId: "MAVEN_DEPLOYER",
+                    resolverId: "MAVEN_RESOLVER"
+                )
+            }
+        }
+
+        stage ('Publish build info') {
+            steps {
+                rtPublishBuildInfo (
+                    serverId: "openmrs_artifact"
+                )
+            }
+        }
+    }    
+}
+
+    
+
