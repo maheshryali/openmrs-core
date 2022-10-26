@@ -14,6 +14,7 @@ pipeline {
                     serverId: 'openmrs_artifact',
                     releaseRepo: 'openmrs-libs-release',
                     snapshotRepo: 'openmrs-libs-snapshot'
+                    //nothing
                 )
 
                 }
