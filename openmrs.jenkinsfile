@@ -16,13 +16,7 @@ pipeline {
                     snapshotRepo: 'openmrs-libs-snapshot'
                 )
 
-                rtMavenResolver (
-                    id: "MAVEN_RESOLVER",
-                    serverId: 'openmrs_artifact',
-                    releaseRepo: 'openmrs-libs-release',
-                    snapshotRepo: 'openmrs-libs-snapshot'
-                )
-            }
+                }
         }
 
         stage ('Exec Maven') {
@@ -30,10 +24,9 @@ pipeline {
                 rtMavenRun (
                     tool: 'mavenew', 
                     pom: 'pom.xml',
-                    goals: 'clean install',
-                    deployerId: 'MAVEN_DEPLOYER',
-                    resolverId: 'MAVEN_RESOLVER'
-                )
+                    goals: 'package',
+                    deployerId: 'MAVEN_DEPLOYER'
+                     )
             }
         }
 
@@ -48,4 +41,3 @@ pipeline {
 }
 
     
-
